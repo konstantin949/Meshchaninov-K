@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[29]:
+
+
+from datetime import datetime, time
+def func(day,hour):
+    if time(19,0)<=hour<=time(20,59):
+        print("Both")
+    else:
+        if day%2==1 and time(21,0)<=hour or day%2==0 and hour<=time(18,59):
+            print("Right")
+        else:
+            print("Left")
+
+
+# In[30]:
+
+
+func(15,time(13,25))
+
+
+# In[31]:
+
+
+func(15,time(19,21))
+
+
+# In[32]:
+
+
+func(12,time(13,45))
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
