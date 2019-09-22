@@ -1,0 +1,23 @@
+#task 1
+def func(day,hour):
+    if 19<=hour<21:
+        print("Both")
+    else:
+        if day%2==1 and 21<=hour or day%2==0 and hour<19:
+            print("Right")
+        else:
+            print("Left")
+            
+#task 2
+def func():
+    a=int(input())
+    if a>=10000 or a<=0:
+        print("Wrong input")
+    else:
+        if a/1000>=1 and a//1000==a%10 and (a%100)//10==(a%1000)//100:
+            print('Palindrom')
+        else:
+            if a%10==0 and a//100==(a/10)%10:
+                print('Palindrom')
+            else:
+                print('no palindrom')
