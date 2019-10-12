@@ -164,3 +164,109 @@ def minus(a,b):
             c.insert(0,'-')
             print(c)
             break
+
+#homework4
+import random
+#Создаем класс Воин:
+class Voin:
+    
+    def __init__(self,name):
+        self.name=name
+        self.health=random.randint(100,150)
+        self.power=random.randint(20,30)
+    
+    def con_health(self):
+        return self.health
+        
+    def con_power(self):
+        return self.power
+        
+    def gain_damage(self,n):
+        self.health=self.health-n
+        if self.health>0:
+            print(self.name,'получил',n,'урона. Осталось',self.health,'здоровья')
+        else:
+            print(self.name,'получил',n,'урона и погиб')
+
+#Создаем класс Воин со щитом:
+class Voin_Armored(Voin):
+    
+    def __init__(self,name):
+        super().__init__(name)
+        self.defense=random.randint(5,10)
+        
+    def gain_damage(self,n):
+        self.health=self.health-(n-self.defense)
+        if self.health>0:
+            print(self.name,'получил',n-self.defense,'урона. Осталось',self.health,'здоровья')
+        else:
+            print(self.name,'получил',n-self.defense,'урона и погиб')
+
+#Создаем класс Воин эксперт
+class Voin_expert(Voin):
+    
+    def __init__(self,name):
+        super().__init__(name)
+    
+    def con_power(self):
+        if random.randint(1,5)==1:
+            return self.power*2
+        else:               
+            return self.power
+
+#task 1
+armor1=Voin('simple')
+armor2=Voin_Armored('medium')
+armor3=Voin_expert('hard')
+print(armor1.con_power())
+print(armor2.con_power())
+print(armor3.con_power())
+
+#task 2
+# функция проведения поединка
+def fight(s1,s2):
+    while s1.health>0 and s2.health>0:
+        s2.gain_damage(s1.con_power())
+        if s2.health>0:
+            s1.gain_damage(s2.con_power())
+    if s2.health>0:
+        print(s2.name,'Wins')
+    if s1.health>0:
+        print(s1.name,'Wins')
+
+armor1=Voin('simple')
+armor2=Voin_Armored('medium')
+fight(armor1,armor2)
+
+armor1=Voin('simple')
+armor3=Voin_expert('hard')
+fight(armor1,armor3)
+
+armor2=Voin_Armored('medium')
+armor3=Voin_expert('hard')
+fight(armor2,armor3)
+
+#task 3
+army1=[Voin('simple1'),Voin('simple2'),Voin('simple3'),Voin('simple4'),Voin_Armored('medium1'),Voin_Armored('medium2'),Voin_Armored('medium3'),Voin_Armored('medium4'),Voin_expert('hard1'),Voin_expert('hard2')]
+army2=[Voin('simple5'),Voin('simple6'),Voin('simple7'),Voin('simple8'),Voin_Armored('medium5'),Voin_Armored('medium6'),Voin_Armored('medium7'),Voin_Armored('medium8'),Voin_expert('hard3'),Voin_expert('hard4')]
+
+while len(army1)>0 and len(army2)>0:
+    fight(army1[random.randint(0,len(army1)-1)],army2[random.randint(0,len(army2)-1)])
+    
+    for i in range(0,len(army1)):
+        if army1[i].health<=0:
+            army1.remove(army1[i])
+            break
+    
+    for i in range(0,len(army2)):
+        if army2[i].health<=0:
+            army2.remove(army2[i])
+            break
+    
+    if len(army1)==0:
+        print('ARMY2 WINS')
+        break
+    
+    if len(army2)==0:
+        print('ARMY1 WINS')
+        break
