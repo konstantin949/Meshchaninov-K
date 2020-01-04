@@ -1,0 +1,315 @@
+#homework1
+#task 1
+def func(day,hour):
+    if 19<=hour<21:
+        print("Both")
+    else:
+        if day%2==1 and 21<=hour or day%2==0 and hour<19:
+            print("Right")
+        else:
+            print("Left")
+            
+#task 2
+def func():
+    a=int(input())
+    if a>=10000 or a<=0:
+        print("Wrong input")
+    else:
+        if a/1000>=1 and a//1000==a%10 and (a%100)//10==(a%1000)//100:
+            print('Palindrom')
+        else:
+            if a%10==0 and a//100==(a/10)%10:
+                print('Palindrom')
+            else:
+                print('no palindrom')
+                
+#homework2
+#task 1
+# task 1
+a=input()
+s1=0
+s2=0
+s3=0
+s4=0
+for i in range(len(a)-1):
+    if a[i]=='ж' and a[i+1]=='ы':
+        s1+=1
+    if a[i]=='ш' and a[i+1]=='ы':
+        s2+=1
+    if a[i]=='ч' and a[i+1]=='я':
+        s3+=1
+    if a[i]=='щ' and a[i+1]=='я':
+        s4+=1
+
+if s1==0:
+    print('Сочетание "жи" написано правильно')
+else:
+    print('Сочетание "жи" написано неправильно')
+    
+if s2==0:
+    print('Сочетание "ши" написано правильно')
+else: 
+    print('Сочетание "ши" написано неправильно')
+    
+if s3==0:
+    print('Сочетание "ча" написано правильно')
+else:
+    print('Сочетание "ча" написано неправильно')
+
+if s4==0:
+    print('Сочетание "ща" написано правильно')
+else:
+    print('Сочетание "ща" написано неправильно')
+
+#task2
+# task 2
+def fun3():
+    n=int(input())
+    s1=0
+    s2=0
+    for i in range(1,n+1):
+        s1=s1+1000/i
+        if i%2==0:
+            s2=s2-1000/i
+        else:
+            s2=s2+1000/i
+    print("Весь путь =",round(s1,2),"Расстояние от дома =",round(s2,2))
+
+#homework 3
+#task 1
+a=[2,'cat',7,2,9,'cat',7,42]
+b=[]
+for i in range(len(a)):
+    if (a[i] in b)==False:
+        b.append(a[i])
+print(b)
+
+#task 2 (3)
+def summ(a,b):
+    c=[]
+    if len(a)>len(b):
+        for i in range(len(a)-len(b)):
+            b.insert(0,0)
+    elif len(b)>len(a):
+        for i in range(len(b)-len(a)):
+            a.insert(0,0)
+    a.insert(0,0)
+    b.insert(0,0)
+    for i in range(len(a)-1,-1,-1):
+        if (a[i]+b[i])<=9:
+                c.insert(0,(a[i]+b[i]))
+        if (a[i]+b[i])>=10:
+            a[i-1]+=1
+            c.insert(0,((a[i]+b[i])%10))
+    if c[0]==0:
+        c.remove(c[0])
+    return c
+
+#task2 (4)
+def minus(a,b):
+    c=[]
+# из большего меньшее при разных длинах
+    if len(a)>len(b):
+        for i in range(len(a)-len(b)):
+            b.insert(0,0)
+        for i in range(len(a)-1,-1,-1):
+            if (a[i]-b[i])>=0:
+                c.insert(0,(a[i]-b[i]))
+            if (a[i]-b[i])<0:
+                a[i-1]-=1
+                c.insert(0,((10+a[i]-b[i])%10))
+        if c[0]==0:
+            c.remove(c[0])
+        print(c)
+
+# из меньшего большее при разных длинах
+    if len(b)>len(a):
+        for i in range(len(b)-len(a)):
+            a.insert(0,0)
+        for i in range(len(b)-1,-1,-1):
+            if (b[i]-a[i])>=0:
+                c.insert(0,(b[i]-a[i]))
+            if (b[i]-a[i])<0:
+                b[i-1]-=1
+                c.insert(0,((10+b[i]-a[i])%10))
+        if c[0]==0:
+            c.remove(c[0])
+        c.insert(0,'-')
+        print(c)
+
+# из меньшего большее при одинаковых длинах
+    for i in range(len(a)):
+        if a[i]==b[i]:
+            continue
+        elif a[i]>b[i]:
+            for i in range(len(a)-1,-1,-1):
+                if (a[i]-b[i])>=0:
+                    c.insert(0,(a[i]-b[i]))
+                if (a[i]-b[i])<0:
+                    a[i-1]-=1
+                    c.insert(0,((10+a[i]-b[i])%10))
+                if c[0]==0:
+                    c.remove(c[0])
+            print(c)
+            break
+        elif b[i]>a[i]:
+            for i in range(len(b)-1,-1,-1):
+                if (b[i]-a[i])>=0:
+                    c.insert(0,(b[i]-a[i]))
+                if (b[i]-a[i])<0:
+                    b[i-1]-=1
+                    c.insert(0,((10+b[i]-a[i])%10))
+                if c[0]==0:
+                    c.remove(c[0])
+            c.insert(0,'-')
+            print(c)
+            break
+
+#homework4
+import random
+#Создаем класс Воин:
+class Voin:
+    
+    def __init__(self,name):
+        self.name=name
+        self.health=random.randint(100,150)
+        self.power=random.randint(20,30)
+    
+    def con_health(self):
+        return self.health
+        
+    def con_power(self):
+        return self.power
+        
+    def gain_damage(self,n):
+        self.health=self.health-n
+        if self.health>0:
+            print(self.name,'получил',n,'урона. Осталось',self.health,'здоровья')
+        else:
+            print(self.name,'получил',n,'урона и погиб')
+
+#Создаем класс Воин со щитом:
+class Voin_Armored(Voin):
+    
+    def __init__(self,name):
+        super().__init__(name)
+        self.defense=random.randint(5,10)
+        
+    def gain_damage(self,n):
+        self.health=self.health-(n-self.defense)
+        if self.health>0:
+            print(self.name,'получил',n-self.defense,'урона. Осталось',self.health,'здоровья')
+        else:
+            print(self.name,'получил',n-self.defense,'урона и погиб')
+
+#Создаем класс Воин эксперт
+class Voin_expert(Voin):
+    
+    def __init__(self,name):
+        super().__init__(name)
+    
+    def con_power(self):
+        if random.randint(1,5)==1:
+            return self.power*2
+        else:               
+            return self.power
+
+#task 1
+armor1=Voin('simple')
+armor2=Voin_Armored('medium')
+armor3=Voin_expert('hard')
+print(armor1.con_power())
+print(armor2.con_power())
+print(armor3.con_power())
+
+#task 2
+# функция проведения поединка
+def fight(s1,s2):
+    while s1.health>0 and s2.health>0:
+        s2.gain_damage(s1.con_power())
+        if s2.health>0:
+            s1.gain_damage(s2.con_power())
+    if s2.health>0:
+        print(s2.name,'Wins')
+    if s1.health>0:
+        print(s1.name,'Wins')
+
+armor1=Voin('simple')
+armor2=Voin_Armored('medium')
+fight(armor1,armor2)
+
+armor1=Voin('simple')
+armor3=Voin_expert('hard')
+fight(armor1,armor3)
+
+armor2=Voin_Armored('medium')
+armor3=Voin_expert('hard')
+fight(armor2,armor3)
+
+#task 3
+army1=[Voin('simple1'),Voin('simple2'),Voin('simple3'),Voin('simple4'),Voin_Armored('medium1'),Voin_Armored('medium2'),Voin_Armored('medium3'),Voin_Armored('medium4'),Voin_expert('hard1'),Voin_expert('hard2')]
+army2=[Voin('simple5'),Voin('simple6'),Voin('simple7'),Voin('simple8'),Voin_Armored('medium5'),Voin_Armored('medium6'),Voin_Armored('medium7'),Voin_Armored('medium8'),Voin_expert('hard3'),Voin_expert('hard4')]
+
+while len(army1)>0 and len(army2)>0:
+    fight(army1[random.randint(0,len(army1)-1)],army2[random.randint(0,len(army2)-1)])
+    
+    for i in range(0,len(army1)):
+        if army1[i].health<=0:
+            army1.remove(army1[i])
+            break
+    
+    for i in range(0,len(army2)):
+        if army2[i].health<=0:
+            army2.remove(army2[i])
+            break
+    
+    if len(army1)==0:
+        print('ARMY2 WINS')
+        break
+    
+    if len(army2)==0:
+        print('ARMY1 WINS')
+        break
+        
+#homework 9
+def fun1(n):
+    if n<10:
+        return n
+    s=0;
+    while n>0:
+        s+=n%10
+        n=n//10
+    return fun1(s)
+    
+def fun2(m,n):
+    if m==0:
+        return n+1
+    if m>0 and n==0:
+        return fun2(m-1,1)
+    if m>0 and n>0:
+        return fun2(m-1,fun2(m,n-1))
+
+fun2(1,3)
+5
+
+def fun3(n):
+    if n<10:
+        return [n]
+    else:
+        return([n%10]+fun3(n//10))
+    
+def fun4(n):
+    if n<2:
+        return(str(n))
+    if n%2==0:
+        return int(str(fun4(n//2))+'0')
+    else:
+        return int(str(fun4(n//2))+'1')
+
+def fun5(n,a=2):
+    if n==a:
+        return [a]
+    if n%a>0:
+        return []+fun5(n,a+1)
+    else:
+        return [a]+fun5(n/a,a)
